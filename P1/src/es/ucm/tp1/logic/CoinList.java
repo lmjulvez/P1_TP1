@@ -4,7 +4,7 @@ public class CoinList {
 	
 	private Game game;
 
-	Coin coinList[] = new Coin[5];
+	
 	
 	public CoinList(Game game) {
 		this.game = game;

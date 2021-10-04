@@ -53,6 +53,7 @@ public class Controller {
 		// TODO fill your code
 		//Chance 1
 		String[] s = HELP;
+		// generar cosas
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
 		for(int i=0;i<8;i++) {

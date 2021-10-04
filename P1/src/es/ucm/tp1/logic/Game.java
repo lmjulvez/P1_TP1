@@ -6,6 +6,7 @@ public class Game {
 	
 	private Player player; 
 	private Coin coin;
+	private CoinList coinlist;
 	
 	private Level level; // be quit with the warning
 	private long seed;
@@ -14,10 +15,23 @@ public class Game {
 		this.level = level;
 		this.seed = seed;
 		player = new Player(this);
-		coin = new Coin(this);
-		
+		coinlist = new CoinList(this);
 		// TODO 	
 	}
+	
+	public void generarCosas() {
+		
+		for (int x = getVisibility() / 2; x < level.getInfoL(); x++) {
+			tryToAddObstacle(new Obstacle(this, x, getRandomLane()), level.obstacleFrequency());
+			
+			tryToAddCoin(new Coin(this, x, getRandomLane()), level.coinFrequency());
+			
+			}
+
+	}
+	
+	
+	
 	
 	public void toggleTest() {
 		// TODO 
@@ -81,6 +95,17 @@ public class Game {
 		}
 		return false;
 	}
+	public int getRandomLane() {
+
+		  return (int) (getRandomNumber() *  getRoadWidth());
+
+		}
+	public Double getRandomNumber() {
+		
+		  // return rand.nextDouble();
+		return 0.4;
+
+		}
 
 	public String positionToString(int j, int i) {
 		// j e i will be called by player ( or car )

@@ -46,7 +46,12 @@ public enum Level {
 		return buffer.toString();
 	}
 
-
+	public int getInfoL() {
+		return this.length;
+	}
+	
+	
+	
 	public int getInfoV() {
 		
 		return this.visibility;
@@ -55,5 +60,15 @@ public enum Level {
 	public int getInfoR() {
 	
 	return this.width;
+	}
+
+	public double coinFrequency() {
+		// TODO Auto-generated method stub
+		return this.coinFrequency;
+	}
+
+	public void  obstacleFrequency() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
