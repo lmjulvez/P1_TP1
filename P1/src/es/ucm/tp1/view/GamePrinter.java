@@ -1,6 +1,7 @@
 package es.ucm.tp1.view;
 
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.Player;
 import es.ucm.tp1.utils.*;
 
 
@@ -38,8 +39,11 @@ public class GamePrinter {
 	protected Game game;
 	
 
+	
+
 	public GamePrinter(Game game) {
 		this.game = game;
+		
 		
 
 		margin = StringUtils.repeat(SPACE, MARGIN_SIZE);
@@ -61,7 +65,7 @@ public class GamePrinter {
 
 	private String getInfo() {
 
-		// TODO add yout code
+		// TODO add your code
 		return "";
 	}
 
@@ -83,7 +87,7 @@ public class GamePrinter {
 		for (int y = 0; y < game.getRoadWidth(); y++) {
 			str.append(this.margin).append(verticalDelimiter);
 			for (int x = 0; x < game.getVisibility(); x++) {
-				str.append(StringUtils.centre(game.positionToString(x, y), CELL_SIZE))
+				str.append(StringUtils.centre(game.positionToString(x, y), CELL_SIZE))//call game.positionToString to know what character have to print.
 						.append(verticalDelimiter);
 			}
 			if (y <  game.getRoadWidth() - 1) {
