@@ -5,9 +5,11 @@ import java.util.Scanner;
 import es.ucm.tp1.control.Controller;
 import es.ucm.tp1.control.Level;
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.Player;
 
 public class SuperCars {
-
+	
+	
 	private static final String VERSION = "1.0";
 
 	private static final String USAGE_MSG = "Usage: Super cars <level> [<seed>]";
@@ -19,6 +21,7 @@ public class SuperCars {
 	private static final String SEED_IS_NUMBER_MSNG = "the seed must be a number";
 
 	private static final String SEED_INFO_MSG = "Random generator initialized with seed: ";
+	
 
 	
 	private static void usage() {
@@ -48,7 +51,7 @@ public class SuperCars {
 
 					System.out.println("Level: " + level.name());
 					System.out.println(SEED_INFO_MSG + seed);
-
+					
 					Game game = new Game(seed, level); 
 					if( Level.TEST.equals(level))
 						game.toggleTest();

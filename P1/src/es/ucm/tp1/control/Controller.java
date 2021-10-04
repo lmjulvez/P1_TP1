@@ -2,7 +2,9 @@ package es.ucm.tp1.control;
 
 import java.util.Scanner;
 
+import es.ucm.tp1.logic.Coin;
 import es.ucm.tp1.logic.Game;
+import es.ucm.tp1.logic.Player;
 import es.ucm.tp1.view.GamePrinter;
 
 public class Controller {
@@ -26,10 +28,14 @@ public class Controller {
 	/* @formatter:off */
 
 	private Game game;
+	
+	private Integer x;
 
 	private Scanner scanner;
 	
 	private GamePrinter printer;
+	
+	private Coin coin;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
@@ -48,8 +54,26 @@ public class Controller {
 
 	public void run() {
 		// TODO fill your code
-		//cambio 1
+		//Chance 1
+		
+		for(int i=0;i<4;i++) {
+		String[] s = HELP;
+		String opcion;
+		Scanner sc = new Scanner(System.in);
+		for(int l=0;l<s.length;l++)
+			System.out.println(s[l]);
+		if(i==0)
+			printGame();
+		opcion = sc.next();
+		if(opcion.equalsIgnoreCase("q")) {
+			game.moveUp();
+		}else if(opcion.equalsIgnoreCase("a")) {
+			game.moveDown();
+			
+		}
 		printGame();
+		
+		}
 	}
 
 }
