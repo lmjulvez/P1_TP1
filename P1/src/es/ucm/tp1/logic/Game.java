@@ -43,6 +43,12 @@ public class Game {
 		player.moveDown();
 	}
 	
+	public void moveForward() {
+		player.moveForward(); // cambiar pues no es necesario tener en cuenta la x del player.
+	}
+	public void UpdateXeY() {
+		coin.UpdateXeY();
+	}
 	
 	public int getVisibility() {
 		
@@ -55,13 +61,37 @@ public class Game {
 	}
 	
 	public String getGameStatus() {
+		
+		System.out.println("Distance: ");
+		System.out.println("Coins: "+player.numCoins);
+		System.out.println("Cicle: ");
+		System.out.println("Total obstacles: ");
+		System.out.println("Total coins: ");
+		System.out.println("Ellaped Time: ");
 		return "";
+	}
+	public void resetGame(Game game) {
+		 
+		 
+		
+	}
+	public boolean checkImpact() {
+		if(this.coin.x == 0 && this.coin.y == this.player.y) {
+			return true;
+		}
+		return false;
 	}
 
 	public String positionToString(int j, int i) {
 		// j e i will be called by player ( or car )
 		if(j==0 && player.y ==i ) {
+			if(checkImpact()) {
+				player.numCoins++;;
+			}
 			return ">";
+		}
+		if(j==coin.x && i== coin.y && !checkImpact()) {
+			return "¢";
 		}
 		
 		

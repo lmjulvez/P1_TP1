@@ -28,14 +28,11 @@ public class Controller {
 	/* @formatter:off */
 
 	private Game game;
-	
-	private Integer x;
 
 	private Scanner scanner;
 	
 	private GamePrinter printer;
 	
-	private Coin coin;
 
 	public Controller(Game game, Scanner scanner) {
 		this.game = game;
@@ -55,13 +52,14 @@ public class Controller {
 	public void run() {
 		// TODO fill your code
 		//Chance 1
-		
-		for(int i=0;i<4;i++) {
 		String[] s = HELP;
-		String opcion;
-		Scanner sc = new Scanner(System.in);
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
+		for(int i=0;i<8;i++) {
+		
+		String opcion;
+		Scanner sc = new Scanner(System.in);
+		game.getGameStatus();
 		if(i==0)
 			printGame();
 		opcion = sc.next();
@@ -69,8 +67,15 @@ public class Controller {
 			game.moveUp();
 		}else if(opcion.equalsIgnoreCase("a")) {
 			game.moveDown();
+		}else if(opcion.equalsIgnoreCase("h")) {
+			for(int l=0;l<s.length;l++)
+				System.out.println(s[l]);
 			
+		}else if(opcion.equalsIgnoreCase("r")) {
+			game.resetGame(game);
 		}
+		game.moveForward();
+		game.UpdateXeY();
 		printGame();
 		
 		}

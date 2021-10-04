@@ -3,6 +3,7 @@ package es.ucm.tp1.logic;
 public class Player {
 	
 	int x=0,y=1;
+	int numCoins = 0;
 	
 	private Game game;
 
