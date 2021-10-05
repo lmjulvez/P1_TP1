@@ -1,12 +1,15 @@
 package es.ucm.tp1.logic;
 
 import es.ucm.tp1.control.Level;
+import java.util.Random;
 
 public class Game {
 	
 	private Player player; 
 	private Coin coin;
 	private CoinList coinlist;
+	private Random rand;
+	private ObstacleList obstacleList;
 	
 	private Level level; // be quit with the warning
 	private long seed;
@@ -16,6 +19,9 @@ public class Game {
 		this.seed = seed;
 		player = new Player(this);
 		coinlist = new CoinList(this);
+		rand = new Random(seed);
+		obstacleList = new ObstacleList(this);
+		
 		// TODO 	
 	}
 	
@@ -29,8 +35,26 @@ public class Game {
 			}
 
 	}
+	private void tryToAddObstacle(Obstacle obstacle, double obstacleFrequency) {
 	
-	
+		if(getRandomNumber() < obstacleFrequency) {	
+			this.obstacleList.addObstacleToArray(obstacle);
+		}
+	}
+
+	public void  tryToAddCoin(Coin coin,double frecuency) {
+		
+		if(getRandomNumber() < frecuency) {
+				if(obstacleList.getCont() == 0 || !checkSpace(coin,this.obstacleList.getLatObstacle())) {
+					this.coinlist.addCoinToArray(coin);
+				}
+		}
+		
+	}
+	public boolean checkSpace(Coin coin,Obstacle obstacle) {
+		
+		return obstacle.getColumn() == coin.x && obstacle.getLane() == coin.y;
+	}
 	
 	
 	public void toggleTest() {
@@ -73,6 +97,10 @@ public class Game {
 		
 		return level.getInfoR();
 	}
+	public int getLenght() {
+		
+		return level.getInfoL();
+	}
 	
 	public String getGameStatus() {
 		
@@ -101,10 +129,7 @@ public class Game {
 
 		}
 	public Double getRandomNumber() {
-		
-		  // return rand.nextDouble();
-		return 0.4;
-
+		   return rand.nextDouble();
 		}
 
 	public String positionToString(int j, int i) {

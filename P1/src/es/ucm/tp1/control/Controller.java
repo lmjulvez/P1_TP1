@@ -60,6 +60,7 @@ public class Controller {
 		
 		String opcion;
 		Scanner sc = new Scanner(System.in);
+		game.generarCosas();
 		game.getGameStatus();
 		if(i==0)
 			printGame();

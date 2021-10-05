@@ -67,8 +67,8 @@ public enum Level {
 		return this.coinFrequency;
 	}
 
-	public void  obstacleFrequency() {
+	public double  obstacleFrequency() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.obstacleFrequency;
 	}
 }

@@ -6,7 +6,7 @@ public class Coin {
 	
 	private Game game;
 	
-	public Coin(Game game) {
+	public Coin(Game game,int x,int lineaRan) {
 		this.game = game;
 	}
 
