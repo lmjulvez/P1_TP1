@@ -45,11 +45,10 @@ public class Game {
 	public void  tryToAddCoin(Coin coin,double frecuency) {
 		
 		if(getRandomNumber() < frecuency) {
-				if(obstacleList.getCont() == 0 || !checkSpace(coin,this.obstacleList.getLatObstacle())) {
+				if(obstacleList.getCont() == 0 || ObstacleOrNotV2(coin.x,coin.y) == null) {
 					this.coinlist.addCoinToArray(coin);
 				}
 		}
-		
 	}
 	public boolean checkSpace(Coin coin,Obstacle obstacle) {
 		
@@ -84,9 +83,14 @@ public class Game {
 	public void moveForward() {
 		player.moveForward(); // cambiar pues no es necesario tener en cuenta la x del player.
 	}
-	public void UpdateXeY() {
-		coin.UpdateXeY();
+	public void UpdateXeY(Coin coin) {
+		coin.UpdateXeY(coin);
+		
 	}
+	//public void UpdateXeY2(Obstacle coin) {
+	//	coin.UpdateXeY(coin);
+		
+	//}
 	
 	public int getVisibility() {
 		
@@ -134,19 +138,56 @@ public class Game {
 
 	public String positionToString(int j, int i) {
 		// j e i will be called by player ( or car )
-		if(j==0 && player.y ==i ) {
-			if(checkImpact()) {
-				player.numCoins++;;
+		if(j==player.x && player.y ==i ) {
+			if(ObstacleOrNot(j,i)) {
+				return "@";
 			}
 			return ">";
 		}
-		if(j==coin.x && i== coin.y && !checkImpact()) {
+		
+		if(CoinOrNot(j,i)) {
 			return "¢";
 		}
+		if(ObstacleOrNot(j,i)) {
+			return "░";
+		}
+	return "";
+		
+	}
+	public boolean CoinOrNot(int x,int y) {
 		
 		
+		for(int i=0;i<this.coinlist.getCont();i++) {
+			if(this.coinlist.getArray()[i].x == x && this.coinlist.getArray()[i].y == y)
+				return true;
+		}
+		
+		return false;
+	}
+public boolean ObstacleOrNot(int x,int y) {
 		
 		
-		return "";
+		for(int i=0;i<this.obstacleList.getCont();i++){
+			if(this.obstacleList.getArray()[i].x == x && this.obstacleList.getArray()[i].y == y)
+				return true;
+		}
+		return false;
+	}
+	public Obstacle ObstacleOrNotV2(int x,int y) {
+		
+		for(int i=0;i<this.obstacleList.getCont();i++)
+			if(obstacleList.getArray()[i].x != x && obstacleList.getArray()[i].y == y ) {
+				return obstacleList.getArray()[i];
+			}
+		return null;
+	}
+	public void UpdateCoins() {
+		for(int i=0;i<this.coinlist.getCont();i++) {
+			this.UpdateXeY(coinlist.getArray()[i]);
+		}
+		
+	}
+	public int getXplayer() {
+		return this.player.getX();
 	}
 }

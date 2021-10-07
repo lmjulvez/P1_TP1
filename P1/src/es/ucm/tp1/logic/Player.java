@@ -24,6 +24,15 @@ public class Player {
 		if(game.isInLimints(x+1, y))
 			this.x +=1;
 	}
+	public int getX() {
+		
+		return this.x;
+		
+		
+	}
+	public boolean checkPunch(ObstacleList obstaclelist) {
+		
+	}
 	
 
 }

@@ -26,4 +26,10 @@ public class CoinList {
 		coinList[this.cont] = coin;
 		this.cont++;
 	}
+	public int getCont() {
+		return this.cont;
+	}
+	public Coin[] getArray() {
+		return this.coinList;
+	}
 }

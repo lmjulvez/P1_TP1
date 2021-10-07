@@ -56,11 +56,12 @@ public class Controller {
 		// generar cosas
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
+		game.generarCosas();
 		for(int i=0;i<8;i++) {
 		
 		String opcion;
 		Scanner sc = new Scanner(System.in);
-		game.generarCosas();
+		
 		game.getGameStatus();
 		if(i==0)
 			printGame();
@@ -77,8 +78,9 @@ public class Controller {
 			game.resetGame(game);
 		}
 		game.moveForward();
-		game.UpdateXeY();
+
 		printGame();
+		
 		
 		}
 	}

@@ -7,10 +7,12 @@ public class Coin {
 	private Game game;
 	
 	public Coin(Game game,int x,int lineaRan) {
+		this.x =x;
+		this.y = lineaRan;
 		this.game = game;
 	}
 
-	public void UpdateXeY() {
-		this.x -= 1;
+	public void UpdateXeY(Coin coins) {
+		coins.x-=1;
 	}
 }

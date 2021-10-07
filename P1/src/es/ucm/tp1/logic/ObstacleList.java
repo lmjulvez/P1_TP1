@@ -33,7 +33,9 @@ public class ObstacleList {
 	public int getCont() {
 		return this.cont;
 	}
-	
+	public Obstacle[] getArray() {
+		return this.ObstaclesList;
+	}
 }
 
 
