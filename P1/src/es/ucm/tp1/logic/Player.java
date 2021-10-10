@@ -12,16 +12,15 @@ public class Player {
 	}
 	
 	public void moveDown() {
-		if(game.isInLimints(x, y+1))
+		if(game.isInLimints(y+1))
 			this.y +=1;
 	}
 	
 	public void moveUp() {
-		if(game.isInLimints(x, y-1))
+		if(game.isInLimints(y-1))
 			this.y-= 1;
 	}
 	public void moveForward() {
-		if(game.isInLimints(x+1, y))
 			this.x +=1;
 	}
 	public int getX() {
@@ -30,8 +29,33 @@ public class Player {
 		
 		
 	}
-	public boolean checkPunch(ObstacleList obstaclelist) {
+	public boolean checkCoins(CoinList coinlist) {
 		
+		for(int i=0;i<coinlist.getCont();i++) {
+			if(coinlist.getArray()[i].x == this.x && coinlist.getArray()[i].y== this.y) {
+				this.numCoins++;
+				coinlist.eraseCoin(i);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+
+	
+	
+	
+	
+public boolean checkPunch(ObstacleList obstaclelist) {
+		
+		for(int i=0;i<obstaclelist.getCont();i++) {
+			if(obstaclelist.getArray()[i].x == this.x && obstaclelist.getArray()[i].y== this.y) {
+				return true;
+			}
+		}
+		
+		return false;
 	}
 	
 

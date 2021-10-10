@@ -2,7 +2,7 @@ package es.ucm.tp1.control;
 
 public enum Level {
 
-	TEST(10, 3, 8, 0.5, 0), EASY(30, 3, 8, 0.5, 0.5), HARD(100, 5, 6, 0.7, 0.3);
+	TEST(10, 3, 8, 0.5, 0), EASY(30, 3, 8, 0.5, 0.5), HARD(100, 5, 6, 0.3, 0.7);
 
 	private int length;
 

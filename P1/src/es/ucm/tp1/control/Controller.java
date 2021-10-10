@@ -2,9 +2,8 @@ package es.ucm.tp1.control;
 
 import java.util.Scanner;
 
-import es.ucm.tp1.logic.Coin;
 import es.ucm.tp1.logic.Game;
-import es.ucm.tp1.logic.Player;
+
 import es.ucm.tp1.view.GamePrinter;
 
 public class Controller {
@@ -12,6 +11,9 @@ public class Controller {
 	private static final String PROMPT = "Command > ";
 
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command";
+	
+	private long timeIni;
+	
 
 	/* @formatter:off */
 	private static final String[] HELP = new String[] {
@@ -40,6 +42,10 @@ public class Controller {
 		this.printer = new GamePrinter(game);
 	}
 
+	public long getTime() {
+		return this.timeIni;
+	}
+		
 	public void printGame() {
 		System.out.println(printer);
 	}
@@ -50,38 +56,40 @@ public class Controller {
 	}
 
 	public void run() {
-		// TODO fill your code
 		//Chance 1
+		this.scanner = new Scanner(System.in);
 		String[] s = HELP;
+		String opcion;
+		boolean gameEnd = false;
 		// generar cosas
+		  System.currentTimeMillis();
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
 		game.generarCosas();
-		for(int i=0;i<8;i++) {
-		
-		String opcion;
-		Scanner sc = new Scanner(System.in);
-		
 		game.getGameStatus();
-		if(i==0)
-			printGame();
-		opcion = sc.next();
-		if(opcion.equalsIgnoreCase("q")) {
-			game.moveUp();
-		}else if(opcion.equalsIgnoreCase("a")) {
-			game.moveDown();
-		}else if(opcion.equalsIgnoreCase("h")) {
-			for(int l=0;l<s.length;l++)
-				System.out.println(s[l]);
-			
-		}else if(opcion.equalsIgnoreCase("r")) {
-			game.resetGame(game);
-		}
-		game.moveForward();
-
 		printGame();
-		
-		
+		System.out.print(PROMPT);
+		opcion = this.scanner.next();
+		while(!gameEnd) {
+			if(opcion.equalsIgnoreCase("q")) {
+				game.moveUp();
+				}else if(opcion.equalsIgnoreCase("a")) {
+					game.moveDown();
+					}else if(opcion.equalsIgnoreCase("h")) {
+						for(int l=0;l<s.length;l++)
+							System.out.println(s[l]);
+							}else if(opcion.equalsIgnoreCase("r")) {
+								
+			}
+			game.moveForward();
+			System.out.println("[DEBUG] "+ "Executing: "+opcion);
+			game.getGameStatus();
+			printGame();
+			gameEnd=game.checkEnd();
+			if(!gameEnd) {
+			System.out.print(PROMPT);
+			opcion = this.scanner.next();
+			}
 		}
 	}
 

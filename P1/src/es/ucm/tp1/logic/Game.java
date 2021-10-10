@@ -11,6 +11,7 @@ public class Game {
 	private Random rand;
 	private ObstacleList obstacleList;
 	
+	
 	private Level level; // be quit with the warning
 	private long seed;
 	
@@ -60,9 +61,9 @@ public class Game {
 		// TODO 
 	}
 	
-	public boolean isInLimints(int x,int y) {
+	public boolean isInLimints(int y) {
 		
-			if(x<getVisibility() && y<getRoadWidth() && y>=0) {
+			if(y<getRoadWidth() && y>=0) {
 				return true;
 			}
 		
@@ -108,17 +109,17 @@ public class Game {
 	
 	public String getGameStatus() {
 		
-		System.out.println("Distance: ");
+		System.out.println("Distance: "+player.x);
 		System.out.println("Coins: "+player.numCoins);
 		System.out.println("Cicle: ");
-		System.out.println("Total obstacles: ");
-		System.out.println("Total coins: ");
+		System.out.println("Total obstacles: "+this.obstacleList.getCont());
+		System.out.println("Total coins: "+this.coinlist.getCont());
 		System.out.println("Ellaped Time: ");
 		return "";
 	}
-	public void resetGame(Game game) {
+	public void resetGame() {
 		 
-		 
+		
 		
 	}
 	public boolean checkImpact() {
@@ -128,9 +129,7 @@ public class Game {
 		return false;
 	}
 	public int getRandomLane() {
-
 		  return (int) (getRandomNumber() *  getRoadWidth());
-
 		}
 	public Double getRandomNumber() {
 		   return rand.nextDouble();
@@ -139,9 +138,11 @@ public class Game {
 	public String positionToString(int j, int i) {
 		// j e i will be called by player ( or car )
 		if(j==player.x && player.y ==i ) {
-			if(ObstacleOrNot(j,i)) {
+			if(player.checkPunch(obstacleList)) {
 				return "@";
+				
 			}
+			player.checkCoins(coinlist);
 			return ">";
 		}
 		
@@ -151,8 +152,24 @@ public class Game {
 		if(ObstacleOrNot(j,i)) {
 			return "░";
 		}
+		if(j==this.level.getInfoL()-1) {
+			return "¦";
+		}
 	return "";
 		
+	}
+	public boolean checkEnd() {
+		if(this.player.checkPunch(obstacleList)) {
+			System.out.println("[GAME OVER] Player crashed!");
+			return true;
+		}
+		//si ha llegado a la meta.
+		if(this.player.x>=this.level.getInfoL()) {
+			System.out.println("[GAME OVER] Player wins!");
+			return true;
+			
+		}
+		return false;
 	}
 	public boolean CoinOrNot(int x,int y) {
 		
@@ -176,7 +193,7 @@ public boolean ObstacleOrNot(int x,int y) {
 	public Obstacle ObstacleOrNotV2(int x,int y) {
 		
 		for(int i=0;i<this.obstacleList.getCont();i++)
-			if(obstacleList.getArray()[i].x != x && obstacleList.getArray()[i].y == y ) {
+			if(obstacleList.getArray()[i].x == x && obstacleList.getArray()[i].y == y ) {
 				return obstacleList.getArray()[i];
 			}
 		return null;

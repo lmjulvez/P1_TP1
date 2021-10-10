@@ -32,4 +32,10 @@ public class CoinList {
 	public Coin[] getArray() {
 		return this.coinList;
 	}
+	public void eraseCoin(int position) {
+		for(int i=position;i<this.cont-1;i++) {
+			this.coinList[i]=this.coinList[i+1];
+		}
+		this.cont--;
+	}
 }
