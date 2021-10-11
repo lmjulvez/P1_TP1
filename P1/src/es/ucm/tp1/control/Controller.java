@@ -27,6 +27,13 @@ public class Controller {
 		"[r]eset: reset game",
 		"[t]est: enables test mode",	
 	};
+	
+	private static final String[] INFO = new String[] {
+			"Available objects:",
+			"[Car] the racing car",
+			"[Coin] gives 1 coin to the player",
+			"[Obstacle] hits car"	,
+		};
 	/* @formatter:off */
 
 	private Game game;
@@ -54,14 +61,15 @@ public class Controller {
 	public void printEndMessage() {
 		System.out.println(printer.endMessage());
 	}
-
+	
 	public void run() {
 		//Chance 1
 		this.scanner = new Scanner(System.in);
 		String[] s = HELP;
+		String[] in=INFO;
 		String opcion;
 		boolean gameEnd = false;
-		// generar cosas
+		boolean pintar=true;
 		  System.currentTimeMillis();
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
@@ -69,26 +77,59 @@ public class Controller {
 		game.getGameStatus();
 		printGame();
 		System.out.print(PROMPT);
-		opcion = this.scanner.next();
+		opcion = this.scanner.nextLine();
+		game.iniciartiempo();
 		while(!gameEnd) {
 			if(opcion.equalsIgnoreCase("q")) {
 				game.moveUp();
+				game.moveForward();
+				game.upcicles();
 				}else if(opcion.equalsIgnoreCase("a")) {
 					game.moveDown();
+					game.moveForward();
+					game.upcicles();
 					}else if(opcion.equalsIgnoreCase("h")) {
+						pintar=false;
 						for(int l=0;l<s.length;l++)
 							System.out.println(s[l]);
-							}else if(opcion.equalsIgnoreCase("r")) {
-								
-			}
-			game.moveForward();
+					}
+						else if(opcion.equalsIgnoreCase("r")) {
+								game.resetGame();
+						}
+								else if(opcion.equalsIgnoreCase("")) {
+									game.moveForward();
+									game.upcicles();
+								}
+										else if(opcion.equalsIgnoreCase("t")) {
+											game.toggleTest();
+											
+										}
+											else if(opcion.equalsIgnoreCase("i")) {
+												for(int l=0;l<in.length;l++)
+													System.out.println(in[l]);
+												pintar=false;
+											}
+												else if(opcion.equalsIgnoreCase("e")) {
+													gameEnd=true;
+													System.out.println("[GAME OVER]: Player leaves the game");
+													pintar=false;
+												}
+													else {
+														System.out.println("[ERROR]: Unknown command");
+													}
+										
 			System.out.println("[DEBUG] "+ "Executing: "+opcion);
-			game.getGameStatus();
-			printGame();
-			gameEnd=game.checkEnd();
+			
+			if(pintar) {
+				game.getGameStatus();
+				printGame();
+			}
+			pintar=true;
+			if(!gameEnd)
+				gameEnd=game.checkEnd();
 			if(!gameEnd) {
 			System.out.print(PROMPT);
-			opcion = this.scanner.next();
+			opcion = this.scanner.nextLine();
 			}
 		}
 	}

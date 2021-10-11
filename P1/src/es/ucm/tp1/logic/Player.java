@@ -2,13 +2,14 @@ package es.ucm.tp1.logic;
 
 public class Player {
 	
-	int x=0,y=1;
-	int numCoins = 0;
+	private int x=0,y=1;
+	private int numCoins = 5;
 	
 	private Game game;
 
 	public Player(Game game) {
 		this.game = game;
+		y=game.getRoadWidth()/2;
 	}
 	
 	public void moveDown() {
@@ -26,6 +27,18 @@ public class Player {
 	public int getX() {
 		
 		return this.x;
+		
+		
+	}
+	public int getcoins() {
+		
+		return this.numCoins;
+		
+		
+	}
+	public int getY() {
+		
+		return this.y;
 		
 		
 	}
