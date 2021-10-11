@@ -132,7 +132,7 @@ public class Game {
 		coinlist = new CoinList(this);
 		rand = new Random(seed);
 		obstacleList = new ObstacleList(this);
-		iniciartiempo();
+		tiempoini=0;
 		this.generarCosas();
 		cicles=0;
 		
@@ -158,7 +158,7 @@ public class Game {
 				
 			}
 			player.checkCoins(coinlist);
-			return "o^o";
+			return 184+"^"+184;
 		}
 		
 		if(CoinOrNot(j,i)) {
@@ -180,30 +180,24 @@ public class Game {
 		}
 		//si ha llegado a la meta.
 		if(this.player.getX()>this.level.getInfoL()) {
-			System.out.println("      ▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
-			System.out.println("   ▄▄██▌█"+" [GAME OVER] Player wins!"+ " ▌");
-			System.out.println("▄▄▄▌▐██▌█"+" New Record: "+tiempo()+"s"+  "        ▌");
-			System.out.println("███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
-			System.out.println("▀(@)▀▀▀▀▀▀▀(@)(@)▀▀▀▀▀▀▀▀▀▀▀▀(@)▀");
-					
-					
-					
-
-			//System.out.println("[GAME OVER] Player wins!");
-			//System.out.println("New Record: "+tiempo()+"s");
+			System.out.println("[GAME OVER] Player wins!");
+			System.out.println("New Record: "+tiempo()+"s");
 			return true;
 			
 		}
 		return false;
 	}
 	public boolean CoinOrNot(int x,int y) {
+		
+		
 		for(int i=0;i<this.coinlist.getCont();i++) {
 			if(this.coinlist.getArray()[i].x == x && this.coinlist.getArray()[i].y == y)
 				return true;
 		}
+		
 		return false;
 	}
-	public boolean ObstacleOrNot(int x,int y) {
+public boolean ObstacleOrNot(int x,int y) {
 		
 		
 		for(int i=0;i<this.obstacleList.getCont();i++){
