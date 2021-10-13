@@ -78,8 +78,8 @@ public class Controller {
 		printGame();
 		System.out.print(PROMPT);
 		opcion = this.scanner.nextLine();
-		System.out.println();
 		System.out.println("[DEBUG] "+ "Executing: "+opcion);
+		System.out.println();
 		game.iniciartiempo();
 		while(!gameEnd) {
 			if(opcion.equalsIgnoreCase("q")) {
@@ -132,8 +132,8 @@ public class Controller {
 			if(!gameEnd) {
 			System.out.print(PROMPT);
 			opcion = this.scanner.nextLine();
-			System.out.println();
 			System.out.println("[DEBUG] "+ "Executing: "+opcion);
+			System.out.println();
 			}
 		}
 	}

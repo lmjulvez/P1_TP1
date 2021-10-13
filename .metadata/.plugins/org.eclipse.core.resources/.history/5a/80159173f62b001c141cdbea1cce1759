@@ -78,8 +78,6 @@ public class Controller {
 		printGame();
 		System.out.print(PROMPT);
 		opcion = this.scanner.nextLine();
-		System.out.println();
-		System.out.println("[DEBUG] "+ "Executing: "+opcion);
 		game.iniciartiempo();
 		while(!gameEnd) {
 			if(opcion.equalsIgnoreCase("q")) {
@@ -90,28 +88,28 @@ public class Controller {
 					game.moveDown();
 					game.moveForward();
 					game.upcicles();
-					}else if(opcion.equalsIgnoreCase("h")||opcion.equalsIgnoreCase("help")) {
+					}else if(opcion.equalsIgnoreCase("h")) {
 						pintar=false;
 						for(int l=0;l<s.length;l++)
 							System.out.println(s[l]);
 					}
-						else if(opcion.equalsIgnoreCase("r")||opcion.equalsIgnoreCase("reset")) {
+						else if(opcion.equalsIgnoreCase("r")) {
 								game.resetGame();
 						}
 								else if(opcion.equalsIgnoreCase("")) {
 									game.moveForward();
 									game.upcicles();
 								}
-										else if(opcion.equalsIgnoreCase("t")||opcion.equalsIgnoreCase("test")) {
+										else if(opcion.equalsIgnoreCase("t")) {
 											game.toggleTest();
 											
 										}
-											else if(opcion.equalsIgnoreCase("i")||opcion.equalsIgnoreCase("info")) {
+											else if(opcion.equalsIgnoreCase("i")) {
 												for(int l=0;l<in.length;l++)
 													System.out.println(in[l]);
 												pintar=false;
 											}
-												else if(opcion.equalsIgnoreCase("e")||opcion.equalsIgnoreCase("exit")) {
+												else if(opcion.equalsIgnoreCase("e")) {
 													gameEnd=true;
 													System.out.println("[GAME OVER]: Player leaves the game");
 													pintar=false;
@@ -120,7 +118,7 @@ public class Controller {
 														System.out.println("[ERROR]: Unknown command");
 													}
 										
-			
+			System.out.println("[DEBUG] "+ "Executing: "+opcion);
 			
 			if(pintar) {
 				game.getGameStatus();
@@ -132,8 +130,6 @@ public class Controller {
 			if(!gameEnd) {
 			System.out.print(PROMPT);
 			opcion = this.scanner.nextLine();
-			System.out.println();
-			System.out.println("[DEBUG] "+ "Executing: "+opcion);
 			}
 		}
 	}

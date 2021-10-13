@@ -12,6 +12,6 @@
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="es.ucm.tp1.SuperCars"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="P1"/>
-    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="EASY 36"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="EASY 363"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="P1"/>
 </launchConfiguration>
