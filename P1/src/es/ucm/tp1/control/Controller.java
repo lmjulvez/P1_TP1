@@ -118,6 +118,7 @@ public class Controller {
 												}
 													else {
 														System.out.println("[ERROR]: Unknown command");
+														pintar =false;
 													}
 										
 			
