@@ -4,7 +4,7 @@ public class Obstacle {
 	
 	private Game game;
 	
-	int x , y;
+	private  int x , y; // 
 	
 	
 	
@@ -18,6 +18,7 @@ public class Obstacle {
 	public int getColumn() {
 		return this.x;
 	}
+	
 	public int getLane() {
 		return this.y;
 	}

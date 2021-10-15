@@ -2,7 +2,7 @@ package es.ucm.tp1.logic;
 
 public class CoinList {
 	
-	private Game game;
+	private Game game; 
 	private int maxCoins;
     private Coin coinList[];
     private int cont;

@@ -13,7 +13,7 @@ public class Game {
 	private long tiempoini;
 	private int cicles;
 	private boolean test=false;
-	private Level level; // be quit with the warning
+	private Level level; 
 	private long seed;
 	
 	public Game(long seed, Level level) {
@@ -56,14 +56,38 @@ public class Game {
 	public void  tryToAddCoin(Coin coin,double frecuency) {
 		
 		if(getRandomNumber() < frecuency) {
-				if(obstacleList.getCont() == 0 || ObstacleOrNotV2(coin.x,coin.y) == null) {
+				if(obstacleList.getCont() == 0 || ObstacleOrNotV2(coin.getXcoin(),coin.getYcoin()) == null) {
 					this.coinlist.addCoinToArray(coin);
 				}
 		}
 	}
+	public boolean CoinOrNot(int x,int y) {
+		for(int i=0;i<this.coinlist.getCont();i++) {
+			if(this.coinlist.getArray()[i].getXcoin() == x && this.coinlist.getArray()[i].getYcoin() == y)
+				return true;
+		}
+		return false;
+	}
+	public boolean ObstacleOrNot(int x,int y) {
+		
+		
+		for(int i=0;i<this.obstacleList.getCont();i++){
+			if(this.obstacleList.getArray()[i].getColumn() == x && this.obstacleList.getArray()[i].getLane() == y)
+				return true;
+		}
+		return false;
+	}
+	public Obstacle ObstacleOrNotV2(int x,int y) {
+		
+		for(int i=0;i<this.obstacleList.getCont();i++)
+			if(obstacleList.getArray()[i].getColumn() == x && obstacleList.getArray()[i].getLane() == y ) {
+				return obstacleList.getArray()[i];
+			}
+		return null;
+	}
 	public boolean checkSpace(Coin coin,Obstacle obstacle) {
 		
-		return obstacle.getColumn() == coin.x && obstacle.getLane() == coin.y;
+		return obstacle.getColumn() == coin.getXcoin() && obstacle.getLane() == coin.getYcoin();
 	}
 	
 	
@@ -76,34 +100,21 @@ public class Game {
 			if(y<getRoadWidth() && y>=0) {
 				return true;
 			}
-		
-		
-		
 		return false;
-		
 	}
 	public void moveUp() { 
 		player.moveUp();
 	}
-		
-	
 	public void moveDown() {
 		player.moveDown();
 	}
-	
 	public void moveForward() {
 		player.moveForward(); 
 	}
-	public void UpdateXeY(Coin coin) {
-		coin.UpdateXeY(coin);
-		
-	}
-	
 	public int getVisibility() {
 		
 		return level.getInfoV();
 	}
-	
 	public int getRoadWidth() {
 		
 		return level.getInfoR();
@@ -111,6 +122,10 @@ public class Game {
 	public int getLenght() {
 		
 		return level.getInfoL();
+	}
+	public int getXplayer() {
+		return player.getX();
+		
 	}
 	
 	public String getGameStatus() {
@@ -139,7 +154,7 @@ public class Game {
 		
 	}
 	public boolean checkImpact() {
-		if(this.coin.x == 0 && this.coin.y == this.player.getY()) {
+		if(this.coin.getXcoin() == 0 && this.coin.getYcoin() == this.player.getY()) {
 			return true;
 		}
 		return false;
@@ -197,38 +212,7 @@ public class Game {
 		}
 		return false;
 	}
-	public boolean CoinOrNot(int x,int y) {
-		for(int i=0;i<this.coinlist.getCont();i++) {
-			if(this.coinlist.getArray()[i].x == x && this.coinlist.getArray()[i].y == y)
-				return true;
-		}
-		return false;
-	}
-	public boolean ObstacleOrNot(int x,int y) {
-		
-		
-		for(int i=0;i<this.obstacleList.getCont();i++){
-			if(this.obstacleList.getArray()[i].x == x && this.obstacleList.getArray()[i].y == y)
-				return true;
-		}
-		return false;
-	}
-	public Obstacle ObstacleOrNotV2(int x,int y) {
-		
-		for(int i=0;i<this.obstacleList.getCont();i++)
-			if(obstacleList.getArray()[i].x == x && obstacleList.getArray()[i].y == y ) {
-				return obstacleList.getArray()[i];
-			}
-		return null;
-	}
-	public void UpdateCoins() {
-		for(int i=0;i<this.coinlist.getCont();i++) {
-			this.UpdateXeY(coinlist.getArray()[i]);
-		}
-		
-	}
-	public int getXplayer() {
-		return player.getX();
-		
-	}
+	
+	
+	
 }

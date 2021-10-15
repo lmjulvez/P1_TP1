@@ -2,7 +2,7 @@ package es.ucm.tp1.logic;
 
 public class Coin {
 	
-	int x=4,y=1;
+	private int x=4,y=1;
 	
 	private Game game;
 	
@@ -11,8 +11,11 @@ public class Coin {
 		this.y = lineaRan;
 		this.game = game;
 	}
+	public int  getXcoin() {
+		return this.x;
+	}
 
-	public void UpdateXeY(Coin coins) {
-		coins.x-=1;
+	public int getYcoin() {
+		return this.y;
 	}
 }

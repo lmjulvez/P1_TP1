@@ -6,7 +6,7 @@ public class Player {
 	private int numCoins = 5;
 	
 	private Game game;
-
+	
 	public Player(Game game) {
 		this.game = game;
 		y=game.getRoadWidth()/2;
@@ -45,7 +45,7 @@ public class Player {
 	public boolean checkCoins(CoinList coinlist) {
 		
 		for(int i=0;i<coinlist.getCont();i++) {
-			if(coinlist.getArray()[i].x == this.x && coinlist.getArray()[i].y== this.y) {
+			if(coinlist.getArray()[i].getXcoin() == this.x && coinlist.getArray()[i].getYcoin() == this.y) {
 				this.numCoins++;
 				coinlist.eraseCoin(i);
 				return true;
@@ -63,7 +63,7 @@ public class Player {
 public boolean checkPunch(ObstacleList obstaclelist) {
 		
 		for(int i=0;i<obstaclelist.getCont();i++) {
-			if(obstaclelist.getArray()[i].x == this.x && obstaclelist.getArray()[i].y== this.y) {
+			if(obstaclelist.getArray()[i].getColumn() == this.x && obstaclelist.getArray()[i].getLane()== this.y) {
 				return true;
 			}
 		}
