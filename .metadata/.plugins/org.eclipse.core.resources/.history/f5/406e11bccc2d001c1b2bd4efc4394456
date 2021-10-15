@@ -15,7 +15,14 @@ public class CoinList {
 		this.cont =0;
 		
 	}
+	/*public void start() {
+		for(int i=0;i<5;i++) {
+			coinList[i] = new Coin(game);
+		}
+	}
+	*/
 	public void addCoinToArray(Coin coin) {
+		
 		coinList[this.cont] = coin;
 		this.cont++;
 	}

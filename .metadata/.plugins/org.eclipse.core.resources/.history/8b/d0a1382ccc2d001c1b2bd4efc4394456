@@ -22,6 +22,7 @@ public enum Level {
 		this.coinFrequency = coinFrequency;
 	}
 
+	// TODO fill your code
 
 	public static Level valueOfIgnoreCase(String inputString) {
 		for (Level level : Level.values()) {
@@ -52,18 +53,22 @@ public enum Level {
 	
 	
 	public int getInfoV() {
+		
 		return this.visibility;
-	}
+		}
 	
 	public int getInfoR() {
-		return this.width;
+	
+	return this.width;
 	}
 
 	public double coinFrequency() {
+		// TODO Auto-generated method stub
 		return this.coinFrequency;
 	}
 
 	public double  obstacleFrequency() {
+		// TODO Auto-generated method stub
 		return this.obstacleFrequency;
 	}
 }

@@ -48,6 +48,10 @@ public class Controller {
 		this.scanner = scanner;
 		this.printer = new GamePrinter(game);
 	}
+
+	public long getTime() {
+		return this.timeIni;
+	}
 		
 	public void printGame() {
 		System.out.println(printer);
@@ -55,7 +59,7 @@ public class Controller {
 	
 
 	public void printEndMessage() {
-		System.out.print(printer.endMessage());
+		System.out.println(printer.endMessage());
 	}
 	
 	public void run() {
@@ -66,6 +70,7 @@ public class Controller {
 		String opcion;
 		boolean gameEnd = false;
 		boolean pintar=true;
+		  System.currentTimeMillis();
 		for(int l=0;l<s.length;l++)
 			System.out.println(s[l]);
 		game.generarCosas();
@@ -108,8 +113,7 @@ public class Controller {
 											}
 												else if(opcion.equalsIgnoreCase("e")||opcion.equalsIgnoreCase("exit")) {
 													gameEnd=true;
-													this.printEndMessage();
-													System.out.println(" Player leaves the game");
+													System.out.println("[GAME OVER]: Player leaves the game");
 													pintar=false;
 												}
 													else {
@@ -126,10 +130,8 @@ public class Controller {
 			pintar=true;
 			if(!gameEnd)
 				gameEnd=game.checkEnd();
-			
 			if(!gameEnd) {
 			System.out.print(PROMPT);
-			
 			opcion = this.scanner.nextLine();
 			System.out.println();
 			System.out.println("[DEBUG] "+ "Executing: "+opcion);

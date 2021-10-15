@@ -108,8 +108,7 @@ public class Controller {
 											}
 												else if(opcion.equalsIgnoreCase("e")||opcion.equalsIgnoreCase("exit")) {
 													gameEnd=true;
-													this.printEndMessage();
-													System.out.println(" Player leaves the game");
+													System.out.println(this.printEndMessage() +" Player leaves the game");
 													pintar=false;
 												}
 													else {

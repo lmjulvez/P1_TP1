@@ -4,7 +4,7 @@ public class Obstacle {
 	
 	private Game game;
 	
-	private int x , y; // 
+	private  int x , y; // 
 	
 	
 	
