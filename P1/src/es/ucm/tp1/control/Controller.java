@@ -12,8 +12,6 @@ public class Controller {
 
 	private static final String UNKNOWN_COMMAND_MSG = "Unknown command";
 	
-	private long timeIni;
-	
 
 	/* @formatter:off */
 	private static final String[] HELP = new String[] {
@@ -64,6 +62,7 @@ public class Controller {
 		String[] s = HELP;
 		String[] in=INFO;
 		String opcion;
+		boolean ok;
 		boolean gameEnd = false;
 		boolean pintar=true;
 		for(int l=0;l<s.length;l++)
@@ -77,47 +76,36 @@ public class Controller {
 		System.out.println("[DEBUG] "+ "Executing: "+opcion);
 		game.iniciartiempo();
 		while(!gameEnd) {
-			if(opcion.equalsIgnoreCase("q")) {
-				game.moveUp();
-				game.moveForward();
-				game.upcicles();
-				}else if(opcion.equalsIgnoreCase("a")) {
-					game.moveDown();
-					game.moveForward();
-					game.upcicles();
-					}else if(opcion.equalsIgnoreCase("h")||opcion.equalsIgnoreCase("help")) {
-						pintar=false;
-						for(int l=0;l<s.length;l++)
-							System.out.println(s[l]);
-					}
-						else if(opcion.equalsIgnoreCase("r")||opcion.equalsIgnoreCase("reset")) {
-								game.resetGame();
-						}
-								else if(opcion.equalsIgnoreCase("")) {
-									game.moveForward();
-									game.upcicles();
-								}
-										else if(opcion.equalsIgnoreCase("t")||opcion.equalsIgnoreCase("test")) {
-											game.toggleTest();
-											
-										}
-											else if(opcion.equalsIgnoreCase("i")||opcion.equalsIgnoreCase("info")) {
-												for(int l=0;l<in.length;l++)
-													System.out.println(in[l]);
-												pintar=false;
-											}
-												else if(opcion.equalsIgnoreCase("e")||opcion.equalsIgnoreCase("exit")) {
-													gameEnd=true;
-													this.printEndMessage();
-													System.out.println(" Player leaves the game");
-													pintar=false;
-												}
-													else {
-														System.out.println("[ERROR]: Unknown command");
-														pintar =false;
-													}
-										
 			
+			if(opcion.equalsIgnoreCase("h")||opcion.equalsIgnoreCase("help")) {
+				pintar=false;
+				for(int l=0;l<s.length;l++)
+					System.out.println(s[l]);
+			}
+			else if(opcion.equalsIgnoreCase("r")||opcion.equalsIgnoreCase("reset")) {
+				game.resetGame();
+			}
+								
+			else if(opcion.equalsIgnoreCase("t")||opcion.equalsIgnoreCase("test")) {
+				game.toggleTest();
+										
+			}
+			else if(opcion.equalsIgnoreCase("i")||opcion.equalsIgnoreCase("info")) {
+				for(int l=0;l<in.length;l++)
+					System.out.println(in[l]);
+				pintar=false;
+			}
+			else if(opcion.equalsIgnoreCase("e")||opcion.equalsIgnoreCase("exit")) {
+				gameEnd=true;
+				this.printEndMessage();
+				System.out.println(" Player leaves the game");
+				pintar=false;
+			}else {
+				if(!game.update(opcion)) {
+					System.out.println("[ERROR] "+ UNKNOWN_COMMAND_MSG);
+					pintar = false;
+				}
+			}								
 			
 			if(pintar) {
 				game.getGameStatus();

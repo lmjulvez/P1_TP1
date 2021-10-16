@@ -12,7 +12,7 @@ public class Game {
 	private ObstacleList obstacleList;
 	private long tiempoini;
 	private int cicles;
-	private boolean test=false;
+	private boolean test=true;
 	private Level level; 
 	private long seed;
 	
@@ -23,8 +23,6 @@ public class Game {
 		coinlist = new CoinList(this);
 		rand = new Random(seed);
 		obstacleList = new ObstacleList(this);
-		
-		// TODO 	
 	}
 	
 	public void generarCosas() {
@@ -38,14 +36,39 @@ public class Game {
 
 	}
 	
+	public boolean update(String opcion) {
+		if(opcion.equalsIgnoreCase("q")) {
+			this.moveUp();
+			this.moveForward();
+			this.upcicles();
+			this.player.checkCoins(coinlist);
+			}else if(opcion.equalsIgnoreCase("a")) {
+				this.moveDown();
+				this.moveForward();
+				this.upcicles();
+				this.player.checkCoins(coinlist);
+			}else if(opcion.equalsIgnoreCase("")||opcion.equalsIgnoreCase("none")||opcion.equalsIgnoreCase("update")) {
+				this.moveForward();
+				this.upcicles();
+				this.player.checkCoins(coinlist);
+			}else {
+				return false;
+			}
+		return true;
+	}
+	
+	
+	
 	public void iniciartiempo() {
 		this.tiempoini = System.currentTimeMillis();
 	}
+	
 	public double tiempo() {
 		if(this.tiempoini==0)
 			return 0;
 		return (double) ((System.currentTimeMillis()-this.tiempoini)/1000);
 	}
+	
 	private void tryToAddObstacle(Obstacle obstacle, double obstacleFrequency) {
 	
 		if(getRandomNumber() < obstacleFrequency) {	
@@ -61,6 +84,7 @@ public class Game {
 				}
 		}
 	}
+	
 	public boolean CoinOrNot(int x,int y) {
 		for(int i=0;i<this.coinlist.getCont();i++) {
 			if(this.coinlist.getArray()[i].getXcoin() == x && this.coinlist.getArray()[i].getYcoin() == y)
@@ -68,6 +92,7 @@ public class Game {
 		}
 		return false;
 	}
+	
 	public boolean ObstacleOrNot(int x,int y) {
 		
 		
@@ -77,6 +102,7 @@ public class Game {
 		}
 		return false;
 	}
+	
 	public Obstacle ObstacleOrNotV2(int x,int y) {
 		
 		for(int i=0;i<this.obstacleList.getCont();i++)
@@ -85,50 +111,57 @@ public class Game {
 			}
 		return null;
 	}
+	
 	public boolean checkSpace(Coin coin,Obstacle obstacle) {
 		
 		return obstacle.getColumn() == coin.getXcoin() && obstacle.getLane() == coin.getYcoin();
 	}
 	
-	
 	public void toggleTest() {
-		this.test=true; 
+		this.test=false; 
 	}
 	
 	public boolean isInLimints(int y) {
-		
 			if(y<getRoadWidth() && y>=0) {
 				return true;
 			}
 		return false;
 	}
+	
 	public void moveUp() { 
 		player.moveUp();
 	}
+	
 	public void moveDown() {
 		player.moveDown();
 	}
+	
 	public void moveForward() {
 		player.moveForward(); 
 	}
+	
 	public int getVisibility() {
 		
 		return level.getInfoV();
 	}
+	
 	public int getRoadWidth() {
 		
 		return level.getInfoR();
 	}
+	
 	public int getLenght() {
 		
 		return level.getInfoL();
 	}
+	
 	public int getXplayer() {
 		return player.getX();
 		
 	}
 	
 	public String getGameStatus() {
+
 		
 		System.out.println("Distance: "+(this.getLenght() - player.getX()));
 		System.out.println("Coins: "+player.getcoins());
@@ -139,9 +172,11 @@ public class Game {
 			System.out.println("Ellaped Time: "+this.tiempo()+"s");
 		return "";
 	}
+	
 	public void upcicles() {
 		this.cicles++;
 	}
+	
 	public void resetGame() {
 		player = new Player(this);
 		coinlist = new CoinList(this);
@@ -153,15 +188,19 @@ public class Game {
 		cicles=0;
 		
 	}
+	
 	public boolean checkImpact() {
 		if(this.coin.getXcoin() == 0 && this.coin.getYcoin() == this.player.getY()) {
 			return true;
 		}
 		return false;
 	}
+	
+	
 	public int getRandomLane() {
 		  return (int) (getRandomNumber() *  getRoadWidth());
 		}
+	
 	public Double getRandomNumber() {
 		   return rand.nextDouble();
 		}
@@ -171,10 +210,8 @@ public class Game {
 		if(j==player.getX() && player.getY() ==i ) {
 			if(player.checkPunch(obstacleList)) {
 				return "@";
-				
 			}
-			player.checkCoins(coinlist);
-			return "o^o";
+			return ">";
 		}
 		
 		if(CoinOrNot(j,i)) {
@@ -189,6 +226,7 @@ public class Game {
 	return "";
 		
 	}
+	
 	public boolean checkEnd() {
 		if(this.player.checkPunch(obstacleList)) {
 			System.out.println("[GAME OVER] Player crashed!");
@@ -196,17 +234,17 @@ public class Game {
 		}
 		//si ha llegado a la meta.
 		if(this.player.getX()>this.level.getInfoL()) {
-			System.out.println("      ▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
-			System.out.println("   ▄▄██▌█"+" [GAME OVER] Player wins!");
-			System.out.println("▄▄▄▌▐██▌█"+" New Record: "+tiempo()+"s");
-			System.out.println("███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
-			System.out.println("▀(@)▀▀▀▀▀▀▀(@)(@)▀▀▀▀▀▀▀▀▀▀▀▀(@)▀");
+			//System.out.println("      ▄▌▐▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▌");
+			//System.out.println("   ▄▄██▌█"+" [GAME OVER] Player wins!");
+			//System.out.println("▄▄▄▌▐██▌█"+" New Record: "+tiempo()+"s");
+			//System.out.println("███████▌█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▌");
+			//System.out.println("▀(@)▀▀▀▀▀▀▀(@)(@)▀▀▀▀▀▀▀▀▀▀▀▀(@)▀");
 					
 					
 					
 
-			//System.out.println("[GAME OVER] Player wins!");
-			//System.out.println("New Record: "+tiempo()+"s");
+			System.out.println("[GAME OVER] Player wins!");
+			System.out.println("New Record: "+tiempo()+"s");
 			return true;
 			
 		}

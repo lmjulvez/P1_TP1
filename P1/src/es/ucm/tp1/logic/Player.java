@@ -20,6 +20,7 @@ public class Player {
 	public void moveUp() {
 		if(game.isInLimints(y-1))
 			this.y-= 1;
+		
 	}
 	
 	public void moveForward() {
