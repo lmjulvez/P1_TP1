@@ -12,7 +12,7 @@ public class Game {
 	private ObstacleList obstacleList;
 	private long tiempoini;
 	private int cicles;
-	private boolean test=true;
+	private boolean test=false;
 	private Level level; 
 	private long seed;
 	
@@ -23,11 +23,14 @@ public class Game {
 		coinlist = new CoinList(this);
 		rand = new Random(seed);
 		obstacleList = new ObstacleList(this);
+		if(level.getInfoL()==10)
+			this.test=true;
 	}
 	
 	public void generarCosas() {
 		
 		for (int x = getVisibility() / 2; x < level.getInfoL(); x++) {
+			
 			tryToAddObstacle(new Obstacle(this, x, getRandomLane()), level.obstacleFrequency());
 			
 			tryToAddCoin(new Coin(this, x, getRandomLane()), level.coinFrequency());
@@ -118,7 +121,10 @@ public class Game {
 	}
 	
 	public void toggleTest() {
-		this.test=false; 
+		if(this.test)
+			this.test=false;
+		else
+			this.test=true;
 	}
 	
 	public boolean isInLimints(int y) {
@@ -141,7 +147,6 @@ public class Game {
 	}
 	
 	public int getVisibility() {
-		
 		return level.getInfoV();
 	}
 	
